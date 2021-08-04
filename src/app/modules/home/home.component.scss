@@ -1,0 +1,21 @@
+.page {
+  color: white;
+  padding: 0 1rem;
+  background: #f1f5f9;
+  &__box {
+    color: #0f0f0f;
+    min-height: 120px;
+    margin: 0 -1rem;
+    font-size: 36px;
+  }
+  &__content {
+    min-height: calc(100vh);
+    background: white;
+    color: #0f0f0f;
+    &-data {
+      padding-top: 24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+}

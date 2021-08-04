@@ -1,0 +1,90 @@
+<div class="container-fluid page">
+  <div class="page__content p-3 position-relative">
+    <div class="page__content-data">
+      <div>
+        <div class="row">
+          <h4>Chat</h4>
+        </div>
+
+        <div *ngIf="!usernameAlreadySelected">
+          <div class="row mt-4">
+            <div class="col-md-8">
+              <button
+                class="btn btn-primary mr-2"
+                *ngFor="let user of userOptions"
+                (click)="chooseUser(user)"
+              >
+                {{ user.username }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="usernameAlreadySelected">
+          <div class="row mt-4">
+            <div class="col-md-3">
+              <div class="well user-list">
+                <h5 class="recipient-name">User List</h5>
+                <div class="user-box">
+                  <div
+                    class="user"
+                    *ngFor="let user of users"
+                    (click)="setReceiver(user)"
+                  >
+                    <b>{{ user.username }}</b>
+                    <span *ngIf="user.username == sender.username">
+                      (you)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="well chat-box">
+                <h5 class="recipient-name" *ngIf="receiver != undefined">
+                  {{ receiver.username }}
+                </h5>
+                <h5 class="recipient-name" *ngIf="receiver == undefined">
+                  Choose a contact first
+                </h5>
+
+                <div class="message-box">
+                  <div class="message" *ngFor="let message of messages">
+                    <b *ngIf="message.from == sender.userID">(yourself)</b>
+                    <b *ngIf="message.from != sender.userID">{{
+                      receiver.username
+                    }}</b>
+                    <p>{{ message.content }}</p>
+                  </div>
+                </div>
+
+                <div class="text-box">
+                  <form
+                    (keyup.enter)="onMessage()"
+                    [formGroup]="messageForm"
+                    (ngSubmit)="onMessage()"
+                  >
+                    <div class="form-group">
+                      <textarea
+                        class="form-control mb-2"
+                        formControlName="message"
+                      ></textarea>
+                      <button type="submit" class="btn btn-primary">
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                  <button (click)="refreshMessage()" class="btn btn-primary">
+                    Refresh
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4"></div>
+      </div>
+    </div>
+  </div>
+</div>

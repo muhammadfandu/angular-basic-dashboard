@@ -1,0 +1,10 @@
+{
+  "/get": {
+    "target": "https://example.com",
+    "secure": true,
+    "pathRewrite": {
+      "^/get": ""
+    },
+    "changeOrigin": true
+  }
+}

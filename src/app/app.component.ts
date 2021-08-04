@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketioService } from './socketio.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-basic-dashboard';
+  sideBarOpen = true;
+
+  constructor(private socketService: SocketioService) {}
+
+  ngOnInit(){
+    this.socketService.setupSocketConnection();
+  }
+
+  ngOnDestroy() {
+    this.socketService.disconnect();
+  }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 }
