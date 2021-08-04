@@ -15,21 +15,12 @@ export class SocketioService {
 
   setupSocketConnection() {
     this.socket = io(environment.SOCKET_ENDPOINT);
-
     this.socket.emit('my message', 'Hello there from Angular.');
 
-    this.socket.on('my broadcast', (data: string) => {
-      console.log(data);
-    });
-
     this.socket.on('users', (users: any) => {
-      console.log(users);
-
       users.forEach((user: any) => {
         user.self = user.userID;
-        // initReactiveProperties(user);
       });
-      // put the current user first, and then sort by username
       this.users = users.sort((a: any, b: any) => {
         if (a.username < b.username) return -1;
         return a.username > b.username ? 1 : 0;
@@ -37,16 +28,12 @@ export class SocketioService {
     });
 
     this.socket.on('private message', (content: any, from: any) => {
-      console.log(content);
-
       this.messages.push({
         fromSelf: false,
         content: content.content,
         from: content.from,
         to: content.to,
       });
-
-      console.log(this.messages);
     });
 
     // this.socket.on('user connected', (user: any) => {

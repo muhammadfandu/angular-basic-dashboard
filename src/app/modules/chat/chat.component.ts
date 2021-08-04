@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     // this.initUsers();
     this.messages = this.socketService.messages;
+
     this.getDBUsersData();
   }
 
